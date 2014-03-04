@@ -38,6 +38,18 @@ Example Usage
       }
     );
 
+Example with json parameters:
+
+    cache.get(
+      myUrl,
+      function(results) {
+        // Do whatever
+      },
+      {
+        params: {'fname': 'Bob', 'lname': 'Smith'}
+      }
+    );
+
 Dependencies
 =====================
 It does require jquery for the ajax call, but if anyone wants to contribute in order to remove that dependency, that would be great.
