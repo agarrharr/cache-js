@@ -14,11 +14,7 @@ var cache = function() {
 
     if(options.offline === true) {
       getFromCache([url, options.type, options.page], function(results) {
-        if(results.success === true && results.rowsAffected > 0) {
-          callback(results.data.rows.item(0));
-        } else {
-          callback({});
-        }
+        callback(results);
       });
     } else {
       getFromOnline(url, options.params, function(results) {
@@ -36,7 +32,13 @@ var cache = function() {
   };
 
   var getFromCache = function (values, callback) {
-    query('SELECT * FROM cache WHERE url=? AND type=? AND page=?;', values, callback);
+    query('SELECT * FROM cache WHERE url=? AND type=? AND page=?;', values, function(results) {
+      if(results.success === true && results.rowsAffected > 0) {
+        callback(JSON.parse(results.data.rows.item(0).data));
+      } else {
+        callback({});
+      }
+    });
   };
 
   var getFromOnline = function (url, params, callback) {
