@@ -11,6 +11,7 @@ var cache = function() {
     if(typeof options.offline === "undefined") { options.offline = false; }
     if(typeof options.fallback === "undefined") { options.fallback = true; }
     if(typeof options.save === "undefined") { options.save = true; }
+    if(typeof options.type === "undefined") { options.type = 'POST'; }
 
     if(options.offline === true) {
       getFromCache([url, options.type, options.page], function(results) {
@@ -27,7 +28,8 @@ var cache = function() {
           }
           callback(results);
         }
-      });
+      },
+      options.type);
     }
   };
 
@@ -41,9 +43,9 @@ var cache = function() {
     });
   };
 
-  var getFromOnline = function (url, params, callback) {
+  var getFromOnline = function (url, params, callback, type) {
     $.ajax({
-      type: 'POST',
+      type: type,
       url: url,
       dataType: 'json',
       data: params,
