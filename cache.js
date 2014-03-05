@@ -49,7 +49,6 @@ var cache = function() {
       data: params,
       async: true,
       success: function(json) {
-        $.mobile.loading('hide');
         callback(json);
       },
       error: function(response) {
