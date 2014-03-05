@@ -21,7 +21,7 @@ fallback- default: true- whether or not you want to get data from the local data
 
 save- default: true- whether or not you want to cache the data to the local database
 
-type- default: 'POST'- type of ajax call to make (either 'GET' or 'POST')
+ajaxType- default: 'POST'- type of ajax call to make (either 'GET' or 'POST')
 
 Example Usage
 =====================
@@ -37,7 +37,7 @@ Example Usage
         offline: false,
         fallback: true,
         save: true,
-        type: 'POST'
+        ajaxType: 'POST'
       }
     );
 

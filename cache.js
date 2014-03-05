@@ -11,7 +11,7 @@ var cache = function() {
     if(typeof options.offline === "undefined") { options.offline = false; }
     if(typeof options.fallback === "undefined") { options.fallback = true; }
     if(typeof options.save === "undefined") { options.save = true; }
-    if(typeof options.type === "undefined") { options.type = 'POST'; }
+    if(typeof options.ajaxType === "undefined") { options.ajaxType = 'POST'; }
 
     if(options.offline === true) {
       getFromCache([url, options.type, options.page], function(results) {
@@ -29,7 +29,7 @@ var cache = function() {
           callback(results);
         }
       },
-      options.type);
+      options.ajaxType);
     }
   };
 
@@ -54,7 +54,7 @@ var cache = function() {
         callback(json);
       },
       error: function(response) {
-        console.log('Ajax Error- url=' + url + ' data=' + JSON.stringify(data) + ' type=' + type);
+        console.log('Ajax Error- url=' + url + ' data=' + JSON.stringify(params) + ' type=' + type);
         callback(response);
       }
     });
