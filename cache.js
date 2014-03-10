@@ -98,7 +98,20 @@ var cache = function() {
   };
 
   var query = function(sql, values, callback) {
-    queryOnDatabase(cacheDb, sql, values, callback);
+    if(typeof values === 'undefined') {
+      values = [];
+    }
+    cacheDb.transaction(function(tx) {
+      tx.executeSql(sql, values, function(tx, results) {
+        if(typeof callback == "function") {
+          callback({success: true, rowsAffected: results.rows.length, data: results});
+        }
+      }, function(tx, error) {
+        if(typeof callback == "function") {
+          callback({success:false, rowsAffected: 0, data: error});
+        }
+      });
+    });
   };
 
   var public = {
