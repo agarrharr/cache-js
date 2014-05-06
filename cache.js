@@ -38,7 +38,7 @@ var cache = function() {
       if(results.success === true && results.rowsAffected > 0) {
         callback(JSON.parse(results.data.rows.item(0).data));
       } else {
-        callback({});
+        callback({success: false});
       }
     });
   };
@@ -62,7 +62,7 @@ var cache = function() {
 
   var set = function(url, json, options) {
     getFromCache([url, options.type, options.page], function(results) {
-      if(results.success === true && results.rowsAffected > 0) {
+      if(results.success === true) {
         query('UPDATE cache SET json=? WHERE url=? AND type=? AND page=?',
           [JSON.stringify(json), url, options.type, options.page], function() {
         });
