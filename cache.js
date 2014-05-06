@@ -36,7 +36,7 @@ var cache = function() {
   var getFromCache = function (values, callback) {
     query('SELECT * FROM cache WHERE url=? AND type=? AND page=?;', values, function(results) {
       if(results.success === true && results.rowsAffected > 0) {
-        callback(JSON.parse(results.data.rows.item(0).data));
+        callback({success: true, data: JSON.parse(results.data.rows.item(0).data)});
       } else {
         callback({success: false});
       }
