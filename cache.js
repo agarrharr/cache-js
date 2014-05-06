@@ -15,7 +15,11 @@ var cache = function() {
 
     if(options.offline === true) {
       getFromCache([url, options.type, options.page], function(results) {
-        callback(results);
+        if(results.success === true) {
+          callback(results.data);
+        } else {
+          callback(results);
+        }
       });
     } else {
       getFromOnline(url, options.params, function(results) {
