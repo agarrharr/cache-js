@@ -63,7 +63,7 @@ var cache = function() {
   var set = function(url, json, options) {
     getFromCache([url, options.type, options.page], function(results) {
       if(results.success === true) {
-        query('UPDATE cache SET json=? WHERE url=? AND type=? AND page=?',
+        query('UPDATE cache SET data=? WHERE url=? AND type=? AND page=?',
           [JSON.stringify(json), url, options.type, options.page], function() {
         });
       } else {
